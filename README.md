@@ -1,4 +1,4 @@
-# pcpay-api-client
+# PChomePay-Library-for-PHP
 
 The client library for PChomePay API.
 

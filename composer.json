@@ -1,0 +1,31 @@
+{
+  "name": "pcpay/api-client",
+  "type": "library",
+  "description": "This is a PChomePay API Client",
+  "keywords": ["payment", "pchome", "api", "pchomepay"],
+  "version" : "1.0.0",
+  "homepage": "http://www.pchomepay.com.tw/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "River Lin",
+      "email": "river@pchomepay.com.tw"
+    },
+    {
+      "name": "Eric G. Yuan",
+      "email": "justericgg@pchomepay.com.tw"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "require-dev": {
+    "mockery/mockery": "^0.9.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "PCPayClient\\": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}

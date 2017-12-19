@@ -12,7 +12,7 @@ add composer.json
 {
     "repositories": [
         {
-            "url": "https://github.com/river0825/pcpay-api-client.git",
+            "url": "https://github.com/PChomePay/PChomePay-Library-for-PHP.git",
             "type": "git"
         }
 

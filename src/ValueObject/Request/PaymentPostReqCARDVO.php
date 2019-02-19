@@ -17,13 +17,6 @@ class PaymentPostReqCARDVO
     public $installment;
 
     /**
-     * 向買家收取之分期信用卡手續費
-     *
-     * @var float
-     */
-    public $rate;
-
-    /**
      * PaymentPostReqCARDVO constructor.
      * @param $installment int
      * @param $rate float
@@ -31,6 +24,5 @@ class PaymentPostReqCARDVO
     public function __construct($installment, $rate)
     {
         $this->installment = $installment;
-        $this->rate = $rate;
     }
 }

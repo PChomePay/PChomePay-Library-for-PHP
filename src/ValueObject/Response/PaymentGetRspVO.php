@@ -29,7 +29,7 @@ class PaymentGetRspVO
     public $amount;
 
     /**
-     * 付款方式
+     * 使用者選擇之付款方式
      * @var string
      */
     public $pay_type;
@@ -39,7 +39,7 @@ class PaymentGetRspVO
      *
      * @var int
      */
-    public $total_amount;
+    public $trade_amount;
 
     /**
      * 平台可以得到的金額
@@ -71,6 +71,14 @@ class PaymentGetRspVO
      */
     public $pay_date;
 
+
+    /**
+     * 買家付款完成日
+     *
+     * @var string
+     */
+    public $actual_pay_date;
+
     /**
      * 訂單失敗時間
      *
@@ -84,16 +92,23 @@ class PaymentGetRspVO
     /**
      * 訂單狀態
      *
-     * * 交易完成：S
-     * * 交易失敗：F
-     * * 交易等待中：W (自行審單中、支付連審單中、ATM等待繳款中)
+     * * 交易完成: S
+     * * 交易失敗: F
+     * * 交易等待中: W (自行審單中、支付連審單中、ATM等待繳款中)
      *
      * @var string
      */
     public $status;
 
     /**
-     * 各類交易類別訂單相應物件
+     * 訂單狀態代碼，請參考訂單狀態代碼表
+     *
+     * @var string
+     */
+    public $status_code;
+
+    /**
+     * ATM 及信用卡交易類別訂單相應物件
      *
      * @var Object
      */
@@ -104,4 +119,9 @@ class PaymentGetRspVO
      * @var string
      */
     public $available_date;
+    /**
+     * 商品內容
+     * @var string
+     */
+    public $items;
 }

@@ -22,7 +22,7 @@ class PaymentPostReqVO extends IPaymentReqVO
      * * 以單選方式時會將使用者直接導頁至該付款方式之頁面
      * * 以複選方式時會先讓使用者看到所指定之付款方式供使用者選後再行付款
      *
-     * @var string
+     * @var string|array
      */
     public $pay_type;
 
@@ -34,18 +34,11 @@ class PaymentPostReqVO extends IPaymentReqVO
     public $amount;
 
     /**
-     * 合作平台訂單時間
+     * 合作平台買家帳號
      *
      * @var string
      */
-    public $order_date;
-
-    /**
-     * 買家 E-Mail
-     *
-     * @var string
-     */
-    public $buyer_email;
+    public $buyer_id;
 
     /**
      * 交易完成後會有「返回」的按鍵，該按鍵按下後會導頁至本欄位所設定之 URL。如無設定本欄位，將返回至合作平台設定時之預設 URL
@@ -55,17 +48,20 @@ class PaymentPostReqVO extends IPaymentReqVO
     public $return_url;
 
     /**
+     * 交易失敗後會有「返回」的按鍵，該按鍵按下後會導頁至本欄位所設定之 URL。如無設定本欄位，將返回至合作平台設定時之預設 URL
+     *
      * @var string
      */
-    public $plat_userid;
+    public $fail_return_url;
 
     /**
-     * @var int
+     * 訂單結果通知 URL
+     * @var string
      */
-    public $plat_deduct_amt;
+    public $notify_url;
 
     /**
-     * 商口名稱，會出現在畫面上供買家確認
+     * 商品名稱，會出現在畫面上供買家確認
      *
      * @var string
      */
@@ -86,9 +82,27 @@ class PaymentPostReqVO extends IPaymentReqVO
     public $atm_info;
 
     /**
+     * 新信用卡訂單進階設定物件
+     *
+     * @var array
+     */
+    public $card_installment;
+    /**
      * 信用卡訂單進階設定物件
      *
-     * @var array<\PCPayClient\ValueObject\Request\PaymentPostReqCARDVO>
+     * @var array
      */
     public $card_info;
+
+    /**
+     * 多商品名稱及連結
+     * @var array<object>
+     */
+    public $items;
+
+    /**
+     * 設定是否開啟十秒跳轉 (Y/N)
+     * @var string
+     */
+    public $return_timer;
 }

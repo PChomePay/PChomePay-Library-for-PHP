@@ -20,7 +20,9 @@ use PCPayClient\Utils\CurlTool;
 use PCPayClient\ValueObject\Request\AtmVAccountPostReqVO;
 use PCPayClient\ValueObject\Request\CheckingGetReqVO;
 use PCPayClient\ValueObject\Request\PaymentAuditPostReqVO;
+use PCPayClient\ValueObject\Request\PaymentGetReqVO;
 use PCPayClient\ValueObject\Request\PaymentPostReqVO;
+use PCPayClient\ValueObject\Request\RefundGetReqVO;
 use PCPayClient\ValueObject\Request\RefundPostReqVO;
 use PCPayClient\ValueObject\Request\WithdrawPostReqVO;
 use PCPayClient\ValueObjects\Response\AtmBanksGetRspVO;
@@ -52,8 +54,8 @@ class PPApiClient
      * @param                    $userId
      * @param                    $secret
      * @param ITokenStorage|null $tokenStorage
-     * @param bool               $sandBox
-     * @param bool               $ignoreSSL
+     * @param bool $sandBox
+     * @param bool $ignoreSSL
      */
     public function __construct($userId, $secret, ITokenStorage $tokenStorage = null, $sandBox = false, $ignoreSSL = false)
     {
@@ -171,32 +173,29 @@ class PPApiClient
     }
 
     /**
-     * @param $amount
+     * @param WithdrawPostReqVO $data
      * @return WithdrawPostRspVO
      * @throws Exception
      */
-    //public function postWithdraw(WithdrawPostReqVO $data)
-    public function postWithdraw($amount)
+    public function postWithdraw(WithdrawPostReqVO $data)
     {
-        $data = new WithdrawPostReqVO();
-        $data->amount = $amount;
         $tokenObj = $this->getTokenObj();
         $result = $this->curlPost($tokenObj->getToken(), $this->postWithdrawURL, json_encode($data));
         return $this->handleResult($result);
     }
 
     /**
-     * @param $orderId
+     * @param PaymentGetReqVO $data
      * @return PaymentGetRspVO
      * @throws Exception
      */
-    public function getPayment($orderId)
+    public function getPayment(PaymentGetReqVO $data)
     {
-        if (!is_string($orderId) || stristr($orderId, "/")) {
+        if (!is_string($data->order_id) || stristr($data->order_id, "/")) {
             throw new ApiInvalidRequestException('Order does not exist!', 20002);
         }
         $tokenObj = $this->getTokenObj();
-        $result = $this->curlGet($tokenObj->getToken(), str_replace("{order_id}", $orderId, $this->getPaymentURL));
+        $result = $this->curlGet($tokenObj->getToken(), str_replace("{order_id}", $data->order_id, $this->getPaymentURL));
         return $this->handleResult($result);
     }
 
@@ -223,17 +222,17 @@ class PPApiClient
     }
 
     /**
-     * @param $refundId
+     * @param RefundGetReqVO $data
      * @return RefundGetRspVO
      * @throws Exception
      */
-    public function getRefund($refundId)
+    public function getRefund(RefundGetReqVO $data)
     {
-        if (!is_string($refundId) || stristr($refundId, "/")) {
+        if (!is_string($data->refund_id) || stristr($data->refund_id, "/")) {
             throw new ApiInvalidRequestException('Order does not exist!', 20002);
         }
         $tokenObj = $this->getTokenObj();
-        $result = $this->curlGet($tokenObj->getToken(), str_replace("{refund_id}", $refundId, $this->getRefundURL));
+        $result = $this->curlGet($tokenObj->getToken(), str_replace("{refund_id}", $data->refund_id, $this->getRefundURL));
         return $this->handleResult($result);
     }
 

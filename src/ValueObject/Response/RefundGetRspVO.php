@@ -67,4 +67,11 @@ class RefundGetRspVO
      * @var string
      */
     public $cover_transfee;
+
+    /**
+     * 買家退款完成日
+     *
+     * @var string
+     */
+    public $actual_refund_date;
 }
